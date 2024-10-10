@@ -1,4 +1,6 @@
-# blender_anim_extensions
+# Blender Anim Extensions 
+
+Some handy extensions for animating within Blender.
 
 ## Setup 
 
