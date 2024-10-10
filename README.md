@@ -2,7 +2,7 @@
 
 Some handy extensions for animating within Blender.
 
-## Setup 
+## Dev Enviroment Setup (for making new add-ons) 
 
 Install these:
 
