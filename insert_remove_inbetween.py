@@ -4,6 +4,7 @@ import bpy
 from bpy.types import Panel, Operator, PropertyGroup 
 from bpy.props import IntProperty
 
+
 class InsertRemoveProps(PropertyGroup):
     frames: IntProperty(
         name="Frames",
@@ -15,7 +16,7 @@ class InsertRemoveProps(PropertyGroup):
 
 
 # Operators for button functionality
-class ANIM_OT_button1(Operator):
+class ANIM_OT_PrintInfo(Operator):
     bl_idname = "anim.print_info"
     bl_label = "Print Info"
     
@@ -33,8 +34,9 @@ class ANIM_OT_button1(Operator):
         
         return {'FINISHED'}
 
-class ANIM_OT_button2(Operator):
-    bl_idname = "anim.insert_frames"
+
+class ANIM_OT_InsertInbetween(Operator):
+    bl_idname = "anim.insert_inbetween"
     bl_label = "Insert Frames"
     
     def execute(self, context):
@@ -51,8 +53,9 @@ class ANIM_OT_button2(Operator):
         
         return {'FINISHED'}
 
-class ANIM_OT_button3(Operator):
-    bl_idname = "anim.remove_frames"
+
+class ANIM_OT_RemoveInbetween(Operator):
+    bl_idname = "anim.remove_inbetween"
     bl_label = "Remove Frames"
     
     def execute(self, context):
@@ -75,19 +78,16 @@ class InsertRemoveInbetweenPanel(Panel):
     bl_category = CATEGORY
     bl_label = MENU_LABEL
 
-    # @classmethod
-    # def poll(cls, context):
-    #     return context.area.type == 'DOPESHEET_EDITOR' or context.area.type == 'GRAPH_EDITOR'
-
     def draw(self, context):
         layout = self.layout
 
         layout.operator("anim.print_info")
 
-        layout.operator("anim.insert_frames")
-        layout.operator("anim.remove_frames")
+        layout.operator("anim.insert_inbetween")
+        layout.operator("anim.remove_inbetween")
          # Add frames input field
         layout.prop(context.scene.insert_remove_props, "frames")
+
 
 # Panel for Graph Editor
 class ANIM_PT_verset_graph(InsertRemoveInbetweenPanel):
@@ -103,9 +103,9 @@ class ANIM_PT_verset_dopesheet(InsertRemoveInbetweenPanel):
 
 # Registration
 classes = (
-    ANIM_OT_button1,
-    ANIM_OT_button2,
-    ANIM_OT_button3,
+    ANIM_OT_PrintInfo,
+    ANIM_OT_InsertInbetween,
+    ANIM_OT_RemoveInbetween,
     ANIM_PT_verset_graph,
     ANIM_PT_verset_dopesheet
 )
@@ -127,4 +127,3 @@ def unregister():
 
     for cls in reversed(classes):
         bpy.utils.unregister_class(cls)
-
