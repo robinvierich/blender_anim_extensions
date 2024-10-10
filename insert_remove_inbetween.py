@@ -74,7 +74,7 @@ class ANIM_OT_RemoveInbetween(Operator):
 CATEGORY = "Anim Extensions"
 MENU_LABEL = "Anim Extensions"
 
-class InsertRemoveInbetweenPanel(Panel):
+class ANIM_PT_InsertRemoveInbetween(Panel):
     bl_category = CATEGORY
     bl_label = MENU_LABEL
 
@@ -90,13 +90,13 @@ class InsertRemoveInbetweenPanel(Panel):
 
 
 # Panel for Graph Editor
-class ANIM_PT_verset_graph(InsertRemoveInbetweenPanel):
+class ANIM_PT_InsertRemoveInBetween_graph(ANIM_PT_InsertRemoveInbetween):
     bl_space_type = 'GRAPH_EDITOR'
     bl_region_type = 'UI'
 
 
 # Panel for Dope Sheet
-class ANIM_PT_verset_dopesheet(InsertRemoveInbetweenPanel):
+class ANIM_PT_InsertRemoveInBetween_dopesheet(ANIM_PT_InsertRemoveInbetween):
     bl_space_type = 'DOPESHEET_EDITOR'
     bl_region_type = 'UI'
 
@@ -106,8 +106,8 @@ classes = (
     ANIM_OT_PrintInfo,
     ANIM_OT_InsertInbetween,
     ANIM_OT_RemoveInbetween,
-    ANIM_PT_verset_graph,
-    ANIM_PT_verset_dopesheet
+    ANIM_PT_InsertRemoveInBetween_graph,
+    ANIM_PT_InsertRemoveInBetween_dopesheet
 )
 
 

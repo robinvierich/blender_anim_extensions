@@ -11,7 +11,7 @@ def get_all_panels():
             yield cls
 
 class PrintPanelValues(Operator):
-    bl_idname = "verset.print_panel_values"        # Unique identifier for buttons and menu items to reference.
+    bl_idname = "utils.print_panel_values"        # Unique identifier for buttons and menu items to reference.
     bl_label = "Print Panel Values"         # Display name in the interface.
 
     def execute(self, context):
