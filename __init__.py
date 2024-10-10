@@ -13,19 +13,13 @@ bl_info = {
 
 from . import utils, insert_remove_inbetween
 
-classes = insert_remove_inbetween.classes
-
 
 def register():
     utils.register()
-
-    for cls in classes:
-        bpy.utils.register_class(cls)
+    insert_remove_inbetween.register()
 
 
 def unregister():
     utils.unregister()
-
-    for cls in reversed(classes):
-        bpy.utils.unregister_class(cls)
+    insert_remove_inbetween.unregister()
 

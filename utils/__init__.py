@@ -3,7 +3,7 @@ import bpy
 from . import print_panel_values
 
 classes = (
-    print_panel_values.PrintPanelValues
+    print_panel_values.PrintPanelValues,
 )
 
 
