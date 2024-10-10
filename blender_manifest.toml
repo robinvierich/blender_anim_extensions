@@ -2,10 +2,10 @@ schema_version = "1.0.0"
 
 # Example of manifest file for a Blender extension
 # Change the values according to your extension
-id = "print_panel_values"
+id = "blender_anim_extensions"
 version = "1.0.0"
-name = "print_panel_values"
-tagline = "This is another extension"
+name = "Anim Extensions"
+tagline = "Some cool, useful anim tools"
 maintainer = "robinv"
 # Supported types: "add-on", "theme"
 type = "add-on"
@@ -25,7 +25,7 @@ blender_version_min = "4.2.0"
 # License conforming to https://spdx.org/licenses/ (use "SPDX: prefix)
 # https://docs.blender.org/manual/en/dev/advanced/extensions/licenses.html
 license = [
-  "SPDX:GPL-2.0-or-later",
+  "MIT",
 ]
 # Optional: required by some licenses.
 # copyright = [

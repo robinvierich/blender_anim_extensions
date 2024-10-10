@@ -1,15 +1,4 @@
 
-ADDON_NAME = "Verset Anim Extensions"
-
-bl_info = {
-    "name": ADDON_NAME,
-    "author": "robinv",
-    "version": (1, 0),
-    "blender": (4, 2, 0),
-    "location": "Timeline/Graph Editor/Dope Sheet -> Verset Anim Extensions",
-    "description": "Adds custom animation tools panel",
-    "category": "Animation"
-}
 
 import bpy
 from bpy.types import Panel, Operator
@@ -81,8 +70,8 @@ class ANIM_PT_verset_graph(Panel):
 class ANIM_PT_verset_dopesheet(Panel):
     bl_space_type = 'DOPESHEET_EDITOR'
     bl_region_type = 'UI'
-    bl_category = 'Custom Animation Tools'
-    bl_label = "Custom Animation Tools"
+    bl_category = CATEGORY
+    bl_label = MENU_LABEL
     
     @classmethod
     def poll(cls, context):
