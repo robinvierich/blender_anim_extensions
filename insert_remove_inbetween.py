@@ -16,8 +16,8 @@ class InsertRemoveProps(PropertyGroup):
 
 # Operators for button functionality
 class ANIM_OT_button1(Operator):
-    bl_idname = "anim.custom_button1"
-    bl_label = "Button 1"
+    bl_idname = "anim.print_info"
+    bl_label = "Print Info"
     
     def execute(self, context):
         # Add your button 1 functionality here
@@ -48,31 +48,51 @@ class ANIM_OT_button1(Operator):
         # Report the findings
         self.report({'INFO'}, f"Current frame: {current_frame}")
         self.report({'INFO'}, f"Number of selected keyframes: {len(selected_keyframes)}")
-        
+
         # Print detailed info about selected keyframes
         for kf in selected_keyframes:
-            self.report({'INFO'}, f"Selected keyframe at frame {kf['frame']} "
-                                f"with value {kf['value']:.2f} "
-                                f"on curve: {kf['curve']}")
+            self.report({'INFO'}, f"Selected { str(kf.type) } at coords: { kf.co } ")
+
         
         return {'FINISHED'}
 
 class ANIM_OT_button2(Operator):
-    bl_idname = "anim.custom_button2"
-    bl_label = "Button 2"
+    bl_idname = "anim.insert_frames"
+    bl_label = "Insert Frames"
     
     def execute(self, context):
-        # Add your button 2 functionality here
-        self.report({'INFO'}, "Button 2 pressed!")
+         # Add your button 1 functionality here
+         # Get the current frame
+        current_frame = context.scene.frame_current
+        
+        # Get selected keyframes
+        selected_keyframes = context.selected_editable_keyframes
+        
+        frames = context.scene.insert_remove_props.frames
+
+        # Print detailed info about selected keyframes
+        for kf in selected_keyframes:
+            if kf.co_ui.x >= current_frame:
+                kf.co_ui.x += frames
+
+        
         return {'FINISHED'}
 
 class ANIM_OT_button3(Operator):
-    bl_idname = "anim.custom_button3"
-    bl_label = "Button 3"
+    bl_idname = "anim.remove_frames"
+    bl_label = "Remove Frames"
     
     def execute(self, context):
-        # Add your button 3 functionality here
-        self.report({'INFO'}, "Button 3 pressed!")
+        current_frame = context.scene.frame_current
+        selected_keyframes = context.selected_editable_keyframes
+        
+        frames = context.scene.insert_remove_props.frames
+
+        # Print detailed info about selected keyframes
+        for kf in selected_keyframes:
+            if kf.co_ui.x >= current_frame:
+                kf.co_ui.x -= frames
+
         return {'FINISHED'}
 
 
@@ -90,12 +110,12 @@ class InsertRemoveInbetweenPanel(Panel):
     def draw(self, context):
         layout = self.layout
 
+        layout.operator("anim.print_info")
+
+        layout.operator("anim.insert_frames")
+        layout.operator("anim.remove_frames")
          # Add frames input field
         layout.prop(context.scene.insert_remove_props, "frames")
-
-        layout.operator("anim.custom_button1")
-        layout.operator("anim.custom_button2")
-        layout.operator("anim.custom_button3")
 
 # # Panel for Timeline
 # class ANIM_PT_verset_timeline(InsertRemoveInbetweenPanel):
