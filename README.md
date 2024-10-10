@@ -24,3 +24,8 @@ Finally, install the "Fake Blender Python API" module for autocomplete and docs:
 > **NOTE** It's safest to run this command in the Terminal within VS Code, like this:
 >
 > ![terminal_window](terminal.png)
+
+
+### Usage
+
+Follow the docs for the [Blender Development](https://marketplace.visualstudio.com/items?itemName=JacquesLucke.blender-development) extension for info on creating new add-ons, connecting a debugger, and iterating. It's a really great extension!
