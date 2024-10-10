@@ -20,36 +20,13 @@ class ANIM_OT_button1(Operator):
     bl_label = "Print Info"
     
     def execute(self, context):
-        # Add your button 1 functionality here
-         # Get the current frame
         current_frame = context.scene.frame_current
         
-        # Get selected keyframes
         selected_keyframes = context.selected_editable_keyframes
         
-        # # Get the active action (animation data)
-        # obj = context.active_object
-        # if obj and obj.animation_data and obj.animation_data.action:
-        #     action = obj.animation_data.action
-            
-        #     # Iterate through all F-Curves in the action
-        #     for fcurve in action.fcurves:
-        #         # Check if this F-Curve is selected in the Graph Editor
-        #         if fcurve.select:
-        #             # Get selected keyframes for this curve
-        #             for keyframe in fcurve.keyframe_points:
-        #                 if keyframe.select_control_point:
-        #                     selected_keyframes.append({
-        #                         'frame': int(keyframe.co[0]),
-        #                         'value': keyframe.co[1],
-        #                         'curve': fcurve.data_path
-        #                     })
-        
-        # Report the findings
         self.report({'INFO'}, f"Current frame: {current_frame}")
         self.report({'INFO'}, f"Number of selected keyframes: {len(selected_keyframes)}")
 
-        # Print detailed info about selected keyframes
         for kf in selected_keyframes:
             self.report({'INFO'}, f"Selected { str(kf.type) } at coords: { kf.co } ")
 
@@ -61,16 +38,12 @@ class ANIM_OT_button2(Operator):
     bl_label = "Insert Frames"
     
     def execute(self, context):
-         # Add your button 1 functionality here
-         # Get the current frame
         current_frame = context.scene.frame_current
         
-        # Get selected keyframes
         selected_keyframes = context.selected_editable_keyframes
         
         frames = context.scene.insert_remove_props.frames
 
-        # Print detailed info about selected keyframes
         for kf in selected_keyframes:
             if kf.co_ui.x >= current_frame:
                 kf.co_ui.x += frames
@@ -88,7 +61,6 @@ class ANIM_OT_button3(Operator):
         
         frames = context.scene.insert_remove_props.frames
 
-        # Print detailed info about selected keyframes
         for kf in selected_keyframes:
             if kf.co_ui.x >= current_frame:
                 kf.co_ui.x -= frames
@@ -117,15 +89,6 @@ class InsertRemoveInbetweenPanel(Panel):
          # Add frames input field
         layout.prop(context.scene.insert_remove_props, "frames")
 
-# # Panel for Timeline
-# class ANIM_PT_verset_timeline(InsertRemoveInbetweenPanel):
-#     bl_space_type = 'DOPESHEET_EDITOR'
-#     bl_region_type = 'UI'
-    
-#     @classmethod
-#     def poll(cls, context):
-#         return context.area.type == 'DOPESHEET_EDITOR' and context.space_data.mode == 'TIMELINE'
-    
 # Panel for Graph Editor
 class ANIM_PT_verset_graph(InsertRemoveInbetweenPanel):
     bl_space_type = 'GRAPH_EDITOR'
@@ -143,7 +106,6 @@ classes = (
     ANIM_OT_button1,
     ANIM_OT_button2,
     ANIM_OT_button3,
-    # ANIM_PT_verset_timeline,
     ANIM_PT_verset_graph,
     ANIM_PT_verset_dopesheet
 )
