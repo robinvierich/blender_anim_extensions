@@ -4,7 +4,7 @@ import bpy
 from bpy.types import Panel, Operator, PropertyGroup 
 from bpy.props import IntProperty
 
-from utils.keyframe_utils import get_selected_keyframes
+from .utils.keyframe_utils import *
 
 class InsertRemoveProps(PropertyGroup):
     frames: IntProperty(
@@ -76,14 +76,12 @@ class ANIM_OT_NudgeSceneKeysRight(Operator):
     def execute(self, context):
         current_frame = context.scene.frame_current
         
-        selected_keyframes = context.selected_editable_keyframes
+        scene_keyframes = get_scene_keyframes(context)
         
         frames = context.scene.insert_remove_props.frames
 
-        for kf in selected_keyframes:
-            if kf.co_ui.x >= current_frame:
-                kf.co_ui.x += frames
-
+        for kf in scene_keyframes:
+            kf.co_ui.x += frames
         
         return {'FINISHED'}
 
@@ -101,6 +99,8 @@ class ANIM_PT_InsertRemoveInbetween(Panel):
 
         layout.operator("anim.insert_inbetween")
         layout.operator("anim.remove_inbetween")
+
+        layout.operator("anim.nudge_scene_right")
          # Add frames input field
         layout.prop(context.scene.insert_remove_props, "frames")
 
@@ -122,6 +122,7 @@ classes = (
     ANIM_OT_PrintInfo,
     ANIM_OT_InsertInbetween,
     ANIM_OT_RemoveInbetween,
+    ANIM_OT_NudgeSceneKeysRight,
     ANIM_PT_InsertRemoveInBetween_graph,
     ANIM_PT_InsertRemoveInBetween_dopesheet
 )
