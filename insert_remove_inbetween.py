@@ -69,14 +69,17 @@ class ANIM_OT_RemoveInbetween(Operator):
 
         return {'FINISHED'}
     
+
 class ANIM_OT_NudgeSceneKeysRight(Operator):
     bl_idname = "anim.nudge_scene_right"
     bl_label = "Nudge Right"
     
     def execute(self, context):
-        current_frame = context.scene.frame_current
-        
-        scene_keyframes = get_scene_keyframes(context)
+
+        if len(context.selected_objects) > 0:
+            scene_keyframes = get_object_keyframes(context.selected_objects)
+        else:
+            scene_keyframes = get_object_keyframes(context.scene.objects)
         
         frames = context.scene.insert_remove_props.frames
 
@@ -84,6 +87,7 @@ class ANIM_OT_NudgeSceneKeysRight(Operator):
             kf.co_ui.x += frames
         
         return {'FINISHED'}
+
 
 CATEGORY = "Anim Extensions"
 MENU_LABEL = "Anim Extensions"

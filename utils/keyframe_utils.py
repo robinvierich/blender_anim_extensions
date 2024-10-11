@@ -1,5 +1,5 @@
 
-from bpy.types import Context
+from bpy.types import Context, Object
 
 def get_selected_keyframes(context : Context):
     if context.area.type == 'DOPESHEET_EDITOR':
@@ -23,13 +23,15 @@ def get_selected_keyframes(context : Context):
     
     return []
 
-def get_scene_keyframes(context : Context):
+
+def get_object_keyframes(objs : list[Object]):
     all_keyframes = []
-    for obj in context.scene.objects:
+
+    for obj in objs:
         action = obj.animation_data.action if obj and obj.animation_data else None
 
         if not action:
-            return []
+            continue
 
         for fcurve in action.fcurves: 
             all_keyframes.extend(fcurve.keyframe_points.values())
