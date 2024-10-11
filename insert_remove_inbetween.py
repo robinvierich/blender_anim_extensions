@@ -4,6 +4,7 @@ import bpy
 from bpy.types import Panel, Operator, PropertyGroup 
 from bpy.props import IntProperty
 
+from utils.keyframe_utils import get_selected_keyframes
 
 class InsertRemoveProps(PropertyGroup):
     frames: IntProperty(
@@ -22,8 +23,7 @@ class ANIM_OT_PrintInfo(Operator):
     
     def execute(self, context):
         current_frame = context.scene.frame_current
-        
-        selected_keyframes = context.selected_editable_keyframes
+        selected_keyframes = get_selected_keyframes(context)
         
         self.report({'INFO'}, f"Current frame: {current_frame}")
         self.report({'INFO'}, f"Number of selected keyframes: {len(selected_keyframes)}")
@@ -41,8 +41,7 @@ class ANIM_OT_InsertInbetween(Operator):
     
     def execute(self, context):
         current_frame = context.scene.frame_current
-        
-        selected_keyframes = context.selected_editable_keyframes
+        selected_keyframes = get_selected_keyframes(context)
         
         frames = context.scene.insert_remove_props.frames
 
@@ -60,7 +59,7 @@ class ANIM_OT_RemoveInbetween(Operator):
     
     def execute(self, context):
         current_frame = context.scene.frame_current
-        selected_keyframes = context.selected_editable_keyframes
+        selected_keyframes = get_selected_keyframes(context)
         
         frames = context.scene.insert_remove_props.frames
 
